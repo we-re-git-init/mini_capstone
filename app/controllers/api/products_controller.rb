@@ -1,7 +1,7 @@
 class Api::ProductsController < ApplicationController
   def the_product
-    product_name = params["name"]
-    @product = Product.find_by(name: product_name)
+    product_id = params["id"]
+    @product = Product.find_by(id: product_id)
     render 'product.json.jb'
   end
 
