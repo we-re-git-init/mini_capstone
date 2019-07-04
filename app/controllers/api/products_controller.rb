@@ -4,9 +4,18 @@ class Api::ProductsController < ApplicationController
     render 'index.json.jb'
   end
 
-  def show
-    @product = Product.find_by(id: params[:id])
-    render 'show.json.jb'
+  def create
+    @product = Product.new(
+      name: params[:name],
+      price: params[:price],
+      image_url: params[:image_url],
+      description: params[:description]
+    )
+    if @product.save
+      render 'show.json.jb'
+    else
+      render 'errors.json.jb', status: :unprocessible_entity
+    end
   end
 
   def show

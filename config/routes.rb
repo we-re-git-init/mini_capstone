@@ -9,5 +9,7 @@ Rails.application.routes.draw do
     get '/products/:id' => 'products#show'
     # update
     patch '/products/:id' => 'products#update'
+    # create
+    post '/products' => 'products#create'
   end
 end
