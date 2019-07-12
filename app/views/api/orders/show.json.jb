@@ -4,6 +4,6 @@
   tax: @order.tax,
   total: @order.total,
   user_id: @order.user_id,
-  product_id: @order.product_id,
+  product: @order.product,
   quantity: @order.quantity
 }
