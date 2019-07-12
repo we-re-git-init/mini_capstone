@@ -3,7 +3,7 @@
   name: product.name,
   price: product.price,
   # image_url: product.image_url,
-  images_url: product.images,
+  images: product.images,
   description: product.description,
   created_at: product.created_at,
   is_discounted: product.is_discounted?,

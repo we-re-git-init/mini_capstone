@@ -5,6 +5,11 @@ class Api::OrdersController < ApplicationController
     render 'index.json.jb'
   end
 
+  def show
+    @order = Order.find_by(id: params[:id])
+    render 'show.json.jb'
+  end
+
   def create
     # subtotal
     # quantity * price
