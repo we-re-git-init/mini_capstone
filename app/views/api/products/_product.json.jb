@@ -10,6 +10,7 @@
   tax: product.tax,
   supplier_name: product.supplier.name,
   total: product.total,
+  categories: product.categories,
   formatted: {
     price: number_to_currency(product.price)
   }
