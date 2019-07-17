@@ -13,24 +13,18 @@ class Api::OrdersController < ApplicationController
   end
 
   def create
-    # subtotal
-    # quantity * price
-    product = Product.find_by(id: params[:product_id])
+    # find all the carted products in the shopping cart for the user who is logged in
+    @carted_products = current_user.carted_products.where(status: 'carted')
+    # figure out how much each one will cost (price * quantity)
+    subtotal = 0
+    tax = 0
+    @carted_products.each do |carted_product|
+      subtotal += carted_product.quantity * carted_product.product.price
+      tax += carted_product.quantity * carted_product.product.tax
+    end
+    # add up all the price * quantities for a subtotal
+    total = subtotal + tax
 
-    calculated_subtotal = params[:quantity].to_i * product.price
-    calculated_tax = params[:quantity].to_i * product.tax
-    calculated_total = calculated_subtotal + calculated_tax
-
-
-    @order = Order.new(
-      quantity: params[:quantity],
-      subtotal: calculated_subtotal,
-      tax: calculated_tax,
-      total: calculated_total,
-      user_id: current_user.id,
-      product_id: params[:product_id]
-    )
-    @order.save
     render 'show.json.jb'
   end
 end
