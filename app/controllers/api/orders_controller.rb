@@ -25,6 +25,15 @@ class Api::OrdersController < ApplicationController
     # add up all the price * quantities for a subtotal
     total = subtotal + tax
 
+    @order = Order.new(
+      subtotal: subtotal,
+      tax: tax,
+      total: total,
+      user_id: current_user.id
+    )
+    @order.save
+
+    @carted_products.update(status: 'purchased', order_id: @order.id)
     render 'show.json.jb'
   end
 end
