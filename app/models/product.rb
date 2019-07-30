@@ -25,4 +25,12 @@ class Product < ApplicationRecord
   def total
     price + tax
   end
+
+  def image_url
+    if images.length > 0
+      return images[0].url
+    else
+      return "https://www.hutchinsontires.com/helpers/img/no_image.jpg"
+    end
+  end
 end

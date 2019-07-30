@@ -1,4 +1,9 @@
 class Api::CartedProductsController < ApplicationController
+  def index
+    @carted_products = current_user.carted_products.where(status: 'carted')
+    render 'index.json.jb'
+  end
+
   def create
     @carted_product = CartedProduct.new(
       status: 'carted',
@@ -8,11 +13,6 @@ class Api::CartedProductsController < ApplicationController
     )
     @carted_product.save
     render 'show.json.jb'
-  end
-
-  def index
-    @carted_products = current_user.carted_products.where(status: 'carted')
-    render 'index.json.jb'
   end
 
   def destroy
